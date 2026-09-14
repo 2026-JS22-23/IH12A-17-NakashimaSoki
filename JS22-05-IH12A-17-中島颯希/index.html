@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>API</title>
+   
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAKLjisxFelKwIl1_G6MiEO9-ya7Twr5s&callback=console.debug&libraries=maps,marker&v=beta">
+    </script>
+    
+
+    <style>
+     
+      #map {
+        height: 100%;
+      }
+
+      
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+  function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 14,
+      center: { lat: 35.246601, lng: 136.789294 }, 
+      zoomControl: true,
+      mapTypeControl: true,
+      streetViewControl: false
+    });
+
+    // 荻須記念美術館
+    const markerOgisu = new google.maps.Marker({
+      position: { lat: 35.246601, lng: 136.789294 },
+      map: map,
+      title: "荻須記念美術館"
+    });
+
+    const infoOgisu = new google.maps.InfoWindow({
+  content: `
+    <div style="text-align:center; max-width:300px; margin-top:-10px;">
+      <div style="text-align:center; max-width:300px; padding:12px 10px;
+            background:#fff8dc; border-radius:10px;">
+
+      <h1 style="margin-top:0.05;">荻須記念美術館</h1>
+      <div style="white-space:nowrap; overflow-x:auto; padding-bottom:10px;">
+        <img src="images/ogisu1.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px; pointer-events:none;">
+        <img src="images/ogisu2.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px; pointer-events:none;">
+        <img src="images/ogisu3.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px; pointer-events:none;">
+      </div>
+      <p>
+        荻須高徳が描いたパリの街並みを中心に、落ち着いた空間で作品を鑑賞できます。
+        建物自体も美しく、ゆったりとした時間を過ごせる美術館です。
+      </p>
+    </div>
+  `
+});
+
+
+
+
+
+
+
+
+    markerOgisu.addListener("click", () => {
+      closeAllInfoWindows();
+    infoOgisu.open(map, markerOgisu);
+  });
+
+
+
+    // 国府宮神社（尾張大國霊神社）
+    const markerKonomiya = new google.maps.Marker({
+      position: { lat: 35.2561, lng: 136.8055 },
+      map: map,
+      title: "国府宮神社（尾張大國霊神社）"
+    });
+
+    const infoKonomiya = new google.maps.InfoWindow({
+  content: `
+    <div style="text-align:center; max-width:300px; padding:12px 10px;">
+      <div style="text-align:center; max-width:300px; padding:12px 10px;
+            background:#ffe4e1; border-radius:10px;">
+
+      <h1 style="margin:0 0 10px 0;">国府宮神社（尾張大國霊神社）</h1>
+
+      <div style="white-space:nowrap; overflow-x:auto; padding-bottom:10px;">
+        
+        <img src="images/konomiya1.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+        <img src="images/konomiya2.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+        <img src="images/konomiya3.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+      </div>
+
+      <p style="white-space:normal; text-align:left; font-size:14px;">
+          日本三大奇祭の一つともいわれる「はだか祭」で知られる歴史ある神社です。
+          広い境内は厳かな雰囲気に包まれ、参拝や散策にぴったりです。
+
+      </p>
+    </div>
+  `
+});
+
+
+
+    markerKonomiya.addListener("click", () => {
+      closeAllInfoWindows();
+      infoKonomiya.open(map, markerKonomiya);
+    });
+
+
+    // 祖父江銀杏パーク
+  const markerGinkgoPark = new google.maps.Marker({
+    position: { lat: 35.256472, lng: 136.740417 },    map: map,
+    title: "祖父江銀杏パーク"
+  });
+  
+  const infoGinkgoPark = new google.maps.InfoWindow({
+  content: `
+    <div style="text-align:center; max-width:300px; padding:12px 10px;">
+      <div style="text-align:center; max-width:300px; padding:12px 10px;
+            background:#fff9c4; border-radius:10px;">
+
+      <h1 style="margin:0 0 10px 0;">祖父江銀杏パーク</h1>
+
+      <div style="white-space:nowrap; overflow-x:auto; padding-bottom:10px;">
+        <img src="images/ginkgo1.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+        <img src="images/ginkgo2.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+        <img src="images/ginkgo3.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+      </div>
+
+      <p style="white-space:normal; text-align:left; font-size:14px;">
+        秋には黄金色のイチョウが一面に広がる絶景スポットです。
+        写真撮影にも人気で、季節を感じられる名所です。
+
+      </p>
+    </div>
+  `
+});
+
+
+  markerGinkgoPark.addListener("click", () => {
+    closeAllInfoWindows();
+    infoGinkgoPark.open(map, markerGinkgoPark);
+  });
+
+
+  // 性海寺（あじさい寺）
+  const markerShokaiji = new google.maps.Marker({
+    position: { lat: 35.240028, lng: 136.793528 },
+    map: map,
+    title: "性海寺（あじさい寺）"
+  });
+
+  const infoShokaiji = new google.maps.InfoWindow({
+  content: `
+    <div style="text-align:center; max-width:300px; padding:12px 10px;">
+      <div style="text-align:center; max-width:300px; padding:12px 10px;
+            background:#f3e5f5; border-radius:10px;">
+
+      <h1 style="margin:0 0 10px 0;">性海寺（あじさい寺）</h1>
+
+      <div style="white-space:nowrap; overflow-x:auto; padding-bottom:10px;">
+        <img src="images/shokaiji1.png" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+        <img src="images/shokaiji2.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+        <img src="images/shokaiji3.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+      </div>
+
+      <p style="white-space:normal; text-align:left; font-size:14px;">
+        初夏には境内いっぱいにあじさいが咲き誇るため、あじさい寺ともよばれている空海が建てたお寺。
+        静かな雰囲気の中で季節の花を楽しめます。性海寺に隣接する「大塚性海寺歴史公園」の敷地内には「大塚古墳（おおつかこふん）」という古墳が保存されています。
+      </p>
+    </div>
+  `
+});
+
+
+
+  markerShokaiji.addListener("click", () => {
+    closeAllInfoWindows();
+    infoShokaiji.open(map, markerShokaiji);
+  });
+
+
+  // 平和桜ネックレス
+const markerSakuraNecklace = new google.maps.Marker({
+  position: { lat: 35.205076, lng: 136.739996 },
+  map: map,
+  title: "平和桜ネックレス"
+});
+
+const infoSakuraNecklace = new google.maps.InfoWindow({
+  content: `
+    <div style="text-align:center; max-width:300px; padding:12px 10px;">
+      <div style="text-align:center; max-width:300px; padding:12px 10px;
+            background:#ffeef2; border-radius:10px;">
+
+      <h1 style="margin:0 0 10px 0;">平和桜ネックレス</h1>
+
+      <div style="white-space:nowrap; overflow-x:auto; padding-bottom:10px;">
+        <img src="images/sakura1.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+        <img src="images/sakura2.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+        <img src="images/sakura3.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+      </div>
+
+      <p style="white-space:normal; text-align:left; font-size:14px;">
+        春には桜並木が続く美しい散歩道。地元で愛される桜の名所です。
+      </p>
+    </div>
+  `
+});
+
+
+
+markerSakuraNecklace.addListener("click", () => {
+  closeAllInfoWindows();
+  infoSakuraNecklace.open(map, markerSakuraNecklace);
+});
+
+
+
+// メタウォーター下水道科学館あいち
+const markerGesui = new google.maps.Marker({
+  position: { lat: 35.231434, lng: 136.754576 },
+  map: map,
+  title: "メタウォーター下水道科学館あいち"
+});
+
+const infoGesui = new google.maps.InfoWindow({
+  content: `
+    <div style="text-align:center; max-width:300px; padding:12px 10px;">
+      <div style="text-align:center; max-width:300px; padding:12px 10px;
+            background:#e3f2fd; border-radius:10px;">
+
+      <h1 style="margin:0 0 10px 0;">メタウォーター下水道科学館あいち</h1>
+
+      <div style="white-space:nowrap; overflow-x:auto; padding-bottom:10px;">
+        <img src="images/gesui1.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+        <img src="images/gesui2.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+        <img src="images/gesui3.png" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+      </div>
+
+      <p style="white-space:normal; text-align:left; font-size:14px;">
+        水の循環や下水道の仕組みを楽しく学べる体験型科学館です。
+        子どもから大人まで楽しめる人気スポットです。
+
+      </p>
+    </div>
+  `
+});
+
+
+markerGesui.addListener("click", () => {
+  closeAllInfoWindows();
+  infoGesui.open(map, markerGesui);
+});
+
+
+
+// サリオパーク祖父江
+const markerSarioPark = new google.maps.Marker({
+  position: { lat: 35.260611, lng: 136.705889 },
+  map: map,
+  title: "サリオパーク祖父江"
+});
+
+const infoSarioPark = new google.maps.InfoWindow({
+  content: `
+    <div style="text-align:center; max-width:300px; padding:12px 10px;">
+      <div style="text-align:center; max-width:300px; padding:12px 10px;
+            background:#e8f5e9; border-radius:10px;">
+
+      <h1 style="margin:0 0 10px 0;">サリオパーク祖父江</h1>
+
+      <div style="white-space:nowrap; overflow-x:auto; padding-bottom:10px;">
+        <img src="images/sario1.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+        <img src="images/sario2.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+        <img src="images/sario3.jpg" style="width:150px; height:150px; object-fit:cover; margin-right:10px;">
+      </div>
+
+      <p style="white-space:normal; text-align:left; font-size:14px;">
+        木曽川沿いに広がる自然豊かな公園です。
+      散歩やピクニックにぴったりの、のんびり過ごせる場所です。
+      毎年開催される「サンドフェスタ」では、巨大な砂像が並び多くの人で賑わいます。
+
+    </div>
+  `
+});
+
+
+
+markerSarioPark.addListener("click", () => {
+  closeAllInfoWindows();
+  infoSarioPark.open(map, markerSarioPark);
+});
+
+
+
+// 稲沢グランドボウル
+const markerGrandBowl = new google.maps.Marker({
+  position: { lat: 35.237585, lng: 136.819463 },
+  map: map,
+  title: "稲沢グランドボウル"
+});
+
+const infoGrandBowl = new google.maps.InfoWindow({
+  content: `
+    <div style="
+      text-align:center;
+      max-width:300px;
+      padding:12px 10px;
+      box-sizing:border-box;
+    ">
+      
+      <h1 style="margin:0 0 10px 0;">稲沢グランドボウル</h1>
+
+      <div style="white-space:nowrap; overflow-x:auto; padding-bottom:10px;">
+        <img src="images/bowl2.jpg"
+             style="width:150px; height:150px; object-fit:cover; margin-right:10px; pointer-events:none;">
+        <img src="images/bowl1.jpg"
+             style="width:150px; height:150px; object-fit:cover; margin-right:10px; pointer-events:none;">
+        <img src="images/bowl3.jpg"
+             style="width:150px; height:150px; object-fit:cover; margin-right:10px; pointer-events:none;">
+      </div>
+
+      <p style="white-space:normal; text-align:left; font-size:14px; margin:0;">
+        ギネス世界記録に認定された、世界最大級のボウリング場。
+        116レーンの圧倒的スケールで、誰でも気軽に楽しめるスポットです。
+      </p>
+
+
+    </div>
+  `
+});
+
+
+
+markerGrandBowl.addListener("click", () => {
+  closeAllInfoWindows();
+  infoGrandBowl.open(map, markerGrandBowl);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+// マップクリックで全ウィンドウ閉じる（追加）
+map.addListener("click", () => {
+  infoOgisu.close();
+  infoKonomiya.close();
+  infoGinkgoPark.close();
+  infoShokaiji.close();
+  infoSakuraNecklace.close();
+  infoGesui.close();
+  infoSarioPark.close();
+  infoGrandBowl.close();
+  
+  
+});
+function closeAllInfoWindows() {
+  infoOgisu.close();
+  infoKonomiya.close();
+  infoGinkgoPark.close();
+  infoShokaiji.close();
+  infoSakuraNecklace.close();
+  infoGesui.close();
+  infoSarioPark.close();
+  infoGrandBowl.close();
+}
+
+
+  }
+
+  window.initMap = initMap;
+  window.addEventListener("load", () => {
+    initMap();
+  });
+</script>
+
+  </body>
+</html>
